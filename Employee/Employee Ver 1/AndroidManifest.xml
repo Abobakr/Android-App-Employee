@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.employee"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="18" />
+	
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <activity
+            android:name="com.example.employee.AddEmployee"
+            android:label="@string/app_name_add" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name="com.example.employee.EmployeeListView"
+            android:label="@string/app_name_list">
+            <intent-filter>
+                <category
+					android:name="android.intent.category.DEFAULT" />				
+                <action android:name="com.example.employee.VIEW_EMPLOYEE_LIST"/>
+            </intent-filter>
+        </activity>
+        <service android:name="com.example.employee.EmployeeService" 
+            android:exported="true">
+   			<intent-filter>
+       			<action android:name="com.example.employee.IEmployee"/>
+    		</intent-filter>
+    	</service>
+    
+        <receiver android:name="com.example.employee.EmployeeBroadCastReceiver">
+            <intent-filter >
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        
+        <provider android:name="com.example.employee.EmployeeProvider"
+            android:authorities="com.example.employee">            
+        </provider>        
+   </application>           
+</manifest>
